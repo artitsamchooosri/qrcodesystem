@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
     $expdate = $_POST['expdate'];
     $body =  'https://' . htmlspecialchars($_SERVER['SERVER_NAME']) . '/qrscan-system/page/checkout-qr-code.php?id=' . $idcoupong;
     $codeContents = $body;
-    QRcode::png($codeContents, $tempDir . $filename, QR_ECLEVEL_H, 9, 2);
+    QRcode::png($codeContents, $tempDir . $filename, QR_ECLEVEL_H, 9,4);
     $returninsert = "";
     $sql = "INSERT INTO `qrscan`.`coupong`(`uuid`, `cread-date`, `exp-date`, `status`, `url-coupong`, `filename`) 
 VALUES ('" . $idcoupong . "', '" . date("Y-m-d H:i:s") . "', '" . $expdate . "', 'available', '" . $body . "', '" . $filename . "')";
@@ -95,7 +95,7 @@ VALUES ('" . $idcoupong . "', '" . date("Y-m-d H:i:s") . "', '" . $expdate . "',
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
                     <li class="menu-item">
-                        <a href="index.html" class="menu-link">
+                        <a href="admin.php" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Dashboard</div>
                         </a>
@@ -104,6 +104,12 @@ VALUES ('" . $idcoupong . "', '" . date("Y-m-d H:i:s") . "', '" . $expdate . "',
                         <a href="javascript:void(0);" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-dock-top"></i>
                             <div data-i18n="Account Settings">Create QR-Code</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="manage-coupong.php" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                            <div data-i18n="Account Settings">Manage QR-Code</div>
                         </a>
                     </li>
                 </ul>
@@ -187,7 +193,7 @@ VALUES ('" . $idcoupong . "', '" . date("Y-m-d H:i:s") . "', '" . $expdate . "',
                                         <?php
                                         if (!empty($returnerr)) {
                                             echo '<div class="alert alert-danger">' . $returnerr . '</div>';
-                                        }else{
+                                        }else if (!empty($returnok)){
                                             echo '<div class="alert alert-success">' . $returnok . '</div>';
                                         }
                                         ?>

@@ -103,7 +103,7 @@ if (isset($_GET['id'])) {
                                             ?>
                                                 <h1 class="mb-0"><small class="text-white"><?php echo @$returnerr; ?></small></h1>
                                             <?php
-                                            } else {
+                                            } else if (!empty($returnok)) {
                                             ?>
                                                 <h1 class="mb-0">Countdown <small class="text-white" id="demo"></small></h1>
 

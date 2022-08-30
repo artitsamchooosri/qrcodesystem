@@ -80,6 +80,12 @@ require_once "config.php";
                             <div data-i18n="Account Settings">Create QR-Code</div>
                         </a>
                     </li>
+                    <li class="menu-item">
+                        <a href="manage-coupong.php" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                            <div data-i18n="Account Settings">Manage QR-Code</div>
+                        </a>
+                    </li>
                 </ul>
             </aside>
             <!-- จบเมนูด้านข้าง -->
