@@ -7,41 +7,67 @@ if (isset($_SESSION["loggedin"]) === false || $_SESSION["loggedin"] === false) {
 
 require_once "config.php";
 ?>
+
+<?php
+
+
+include('../libs/phpqrcode/qrlib.php');
+$conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+
+if (isset($_POST['submit'])) {
+    $tempDir = '../temp/';
+    $idcoupong = $_POST['idcoupong'];
+    $filename = $idcoupong . '.png';
+    $expdate = $_POST['expdate'];
+    $body =  'https://' . htmlspecialchars($_SERVER['SERVER_NAME']) . '/qrscan-system/page/checkout-qr-code.php?id=' . $idcoupong;
+    $codeContents = $body;
+    QRcode::png($codeContents, $tempDir . $filename, QR_ECLEVEL_H, 9, 2);
+    $returninsert = "";
+    $sql = "INSERT INTO `qrscan`.`coupong`(`uuid`, `cread-date`, `exp-date`, `status`, `url-coupong`, `filename`) 
+VALUES ('" . $idcoupong . "', '" . date("Y-m-d H:i:s") . "', '" . $expdate . "', 'available', '" . $body . "', '" . $filename . "')";
+    $query = mysqli_query($conn, $sql);
+
+    if ($query) {
+        $returnok = "เพิ่มข้อมูลสำเร็จ";
+    } else {
+        $returnerr = "ไม่สามารถเพิ่มข้อมูลได้";
+    }
+
+    mysqli_close($conn);
+}
+?>
 <!DOCTYPE html>
 <html class="light-style layout-menu-fixed" data-assets-path="../assets/">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+<title>Create QR-Code</title>
+<meta name="description" content="" />
+<link rel="icon" type="image/x-icon" href="../assets/img/favicon/scanner.ico" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>INDEX</title>
-    <meta name="description" content="" />
-    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/scanner.ico" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
+<!-- Icons. Uncomment required icon fonts -->
+<link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
 
-    <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
+<!-- Core CSS -->
+<link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
+<link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+<link rel="stylesheet" href="../assets/css/demo.css" />
 
-    <!-- Core CSS -->
-    <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="../assets/css/demo.css" />
+<!-- Vendors CSS -->
+<link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+<link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
 
-    <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
+<!-- Page CSS -->
 
-    <!-- Page CSS -->
+<!-- Helpers -->
+<script src="../assets/vendor/js/helpers.js"></script>
 
-    <!-- Helpers -->
-    <script src="../assets/vendor/js/helpers.js"></script>
-
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="../assets/js/config.js"></script>
-</head>
+<!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+<!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+<script src="../assets/js/config.js"></script>
 
 <body>
     <div class="layout-wrapper layout-content-navbar">
@@ -68,14 +94,14 @@ require_once "config.php";
                 <!-- Menu -->
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
-                    <li class="menu-item active">
-                        <a href="admin.php" class="menu-link">
+                    <li class="menu-item">
+                        <a href="index.html" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Dashboard</div>
                         </a>
                     </li>
-                    <li class="menu-item">
-                        <a href="cread-qr-code.php" class="menu-link">
+                    <li class="menu-item active">
+                        <a href="javascript:void(0);" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-dock-top"></i>
                             <div data-i18n="Account Settings">Create QR-Code</div>
                         </a>
@@ -97,7 +123,7 @@ require_once "config.php";
 
                         <div class="navbar-nav align-items-center">
                             <div class="nav-item d-flex align-items-center">
-                                Home
+                                Create QR-Code
                             </div>
                         </div>
 
@@ -135,7 +161,7 @@ require_once "config.php";
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="logout.php">
+                                        <a class="dropdown-item" href="auth-login-basic.html">
                                             <i class="bx bx-power-off me-2"></i>
                                             <span class="align-middle">Log Out</span>
                                         </a>
@@ -152,10 +178,59 @@ require_once "config.php";
                 <div class="content-wrapper">
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
+
                         <div class="row">
+                            <div class="col-xl-6">
+                                <div class="card mb-4">
+                                    <h5 class="card-header">Data Generate</h5>
+                                    <div class="card-body">
+                                        <?php
+                                        if (!empty($returnerr)) {
+                                            echo '<div class="alert alert-danger">' . $returnerr . '</div>';
+                                        }else{
+                                            echo '<div class="alert alert-success">' . $returnok . '</div>';
+                                        }
+                                        ?>
+                                        <form method="post" action="<?php echo  htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                                            <div class="mb-3 row">
+                                                <label for="html5-text-input" class="col-md-4 col-form-label">ID Coupon</label>
+                                                <div class="col-md-8">
+                                                    <input class="form-control" type="text" value="<?php echo @$idcoupong; ?>" placeholder="ID Coupon" id="idcoupong" name="idcoupong" />
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 row">
+                                                <label for="html5-datetime-local-input" class="col-md-4 col-form-label">Expiration Date</label>
+                                                <div class="col-md-8">
+                                                    <input class="form-control" type="datetime-local" value="<?php echo @$expdate; ?>" id="expdate" name="expdate" />
+                                                </div>
+                                            </div>
+                                            <div class="row d-flex justify-content-center">
+                                                <input type="submit" name="submit" class="btn btn-primary submitBtn" style="width:20em; margin:0;" />
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="card mb-4">
+                                    <h5 class="card-header">QR Code Result</h5>
+                                    <?php
+                                    if (!isset($filename)) {
+                                        $filename = "author.gif";
+                                    }
+                                    ?>
+                                    <div class="card-body">
+                                        <center>
+                                            <div class="qrframe" style="border:2px solid black; width:210px; height:210px;">
+                                                <?php echo '<img src="../temp/' . @$filename . '" style="width:200px; height:200px;"><br>'; ?>
+                                            </div>
+                                            <a class="btn btn-primary submitBtn" style="width:210px; margin:5px 0;" href="download.php?file=<?php echo $filename; ?>.png ">Download QR Code</a>
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="row">
-                        </div>
+
                     </div>
                     <!-- /Content wrapper -->
 
