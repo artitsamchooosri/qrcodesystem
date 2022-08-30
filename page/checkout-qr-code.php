@@ -17,8 +17,8 @@ if (isset($_GET['id'])) {
         } else {
             $returnerr = "ส่งคำสั่งไม่ได้";
         }
-    }else{
-        $returnerr=$check_coupong;
+    } else {
+        $returnerr = $check_coupong;
     }
 }
 ?>
@@ -92,8 +92,8 @@ if (isset($_GET['id'])) {
                 <div class="content-wrapper">
                     <!-- Content -->
 
-                    <div class="container-xxl flex-grow-1 container-p-y">
-                        <div class="row">
+                    <div class="container-xxl flex-grow-1 container-p-y ">
+                        <div class="row pb-3">
                             <div class="col-lg-12 mb-12 order-0">
                                 <div class="card bg-warning text-white">
                                     <div class="d-flex align-items-end row">
@@ -118,6 +118,68 @@ if (isset($_GET['id'])) {
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-12 ">
+                            <div class="col-sm-6 col-lg-4 mb-4">
+                                <div class="card">
+                                    <img class="card-img-top" src="../assets/img/elements/4.jpg" alt="Card image cap" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-4 mb-4">
+                                <div class="card">
+                                    <img class="card-img-top" src="../assets/img/elements/4.jpg" alt="Card image cap" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-4 mb-4">
+                                <div class="card">
+                                    <img class="card-img-top" src="../assets/img/elements/4.jpg" alt="Card image cap" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-4 mb-4">
+                                <div class="card">
+                                    <img class="card-img-top" src="../assets/img/elements/4.jpg" alt="Card image cap" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-4 mb-4">
+                                <div class="card">
+                                    <img class="card-img-top" src="../assets/img/elements/4.jpg" alt="Card image cap" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-4 mb-4">
+                                <div class="card">
+                                    <img class="card-img-top" src="../assets/img/elements/4.jpg" alt="Card image cap" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-4 mb-4">
+                                <div class="card">
+                                    <img class="card-img-top" src="../assets/img/elements/4.jpg" alt="Card image cap" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-4 mb-4">
+                                <div class="card">
+                                    <img class="card-img-top" src="../assets/img/elements/4.jpg" alt="Card image cap" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-4 mb-4">
+                                <div class="card">
+                                    <img class="card-img-top" src="../assets/img/elements/4.jpg" alt="Card image cap" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-4 mb-4">
+                                <div class="card">
+                                    <img class="card-img-top" src="../assets/img/elements/4.jpg" alt="Card image cap" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-4 mb-4">
+                                <div class="card">
+                                    <img class="card-img-top" src="../assets/img/elements/4.jpg" alt="Card image cap" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-4 mb-4">
+                                <div class="card">
+                                    <img class="card-img-top" src="../assets/img/elements/4.jpg" alt="Card image cap" />
                                 </div>
                             </div>
                         </div>
