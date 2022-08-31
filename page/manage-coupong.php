@@ -6,6 +6,7 @@ if (isset($_SESSION["loggedin"]) === false || $_SESSION["loggedin"] === false) {
 }
 
 require_once "config.php";
+
 ?>
 <!DOCTYPE html>
 <html class="light-style layout-menu-fixed" data-assets-path="../assets/">
@@ -31,10 +32,12 @@ require_once "config.php";
 
 <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
 <link rel="stylesheet" href="../css/style.css">
+
 <!-- Page CSS -->
 
 <!-- Helpers -->
 <script src="../assets/vendor/js/helpers.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
 
 <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
 <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
@@ -138,7 +141,7 @@ require_once "config.php";
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="auth-login-basic.html">
+                                        <a class="dropdown-item" href="logout.php">
                                             <i class="bx bx-power-off me-2"></i>
                                             <span class="align-middle">Log Out</span>
                                         </a>
@@ -168,7 +171,7 @@ require_once "config.php";
                                         </div>
                                     </div>
                                 </div>
-                                <table class="table table-striped table-hover">
+                                <table class="table table-striped table-hover" id="example" class="display">
                                     <thead>
                                         <tr>
                                             <th style="width:10%">
@@ -213,21 +216,31 @@ require_once "config.php";
                                                 </td>
                                                 <td><?php echo '<img src="../temp/' . $row["filename"] . '" style="width:50px; height:50px;">'; ?></td>
                                                 <td><?php echo $row["uuid"]; ?></td>
-                                                <td><?php echo $row["cread-date"]; ?></td>
-                                                <td><?php echo $row["exp-date"]; ?></td>
-                                                <td><?php echo $row["checkout-date"]; ?></td>
+                                                <td><?php echo date_format(new DateTime($row["cread-date"]), "d/m/Y H:i:s"); ?></td>
+                                                <td><?php echo date_format(new DateTime($row["exp-date"]), "d/m/Y H:i:s"); ?></td>
+                                                <td>
+                                                    <?php
+                                                    if ($row["checkout-date"] == "") {
+                                                        echo $row["checkout-date"];
+                                                    } else {
+                                                        echo date_format(new DateTime($row["checkout-date"]), "d/m/Y H:i:s");
+                                                    }
+
+                                                    ?>
+                                                </td>
                                                 <td><?php echo $row["status"]; ?></td>
                                                 <td>
                                                     <a href="#editEmployeeModal" class="edit" data-bs-toggle="modal">
 
                                                         <i class="menu-icon tf-icons bx bx-edit update" data-toggle="tooltip" data-uuid="<?php echo $row["uuid"]; ?>" data-cread-date="<?php echo $row["cread-date"]; ?>" data-exp-date="<?php echo $row["exp-date"]; ?>" data-checkout-date="<?php echo $row["checkout-date"]; ?>" data-status="<?php echo $row["status"]; ?>" title="Edit"></i>
                                                     </a>
+                                                    <a href="download.php?file=<?php echo $row["filename"]; ?>" class="download">
+                                                        <i class="menu-icon tf-icons bx bx-download" data-toggle="tooltip" title="Download"></i>
+                                                    </a>
                                                     <a href="#deleteEmployeeModal" class="delete" data-id="<?php echo $row["uuid"]; ?>" data-bs-toggle="modal">
                                                         <i class="menu-icon tf-icons bx bx-trash-alt" data-toggle="tooltip" title="Delete"></i>
                                                     </a>
-                                                    <a href="#" class="download">
-                                                        <i class="menu-icon tf-icons bx bx-download" data-toggle="tooltip" title="Delete"></i>
-                                                    </a>
+
                                                 </td>
                                             </tr>
                                         <?php
@@ -244,31 +257,23 @@ require_once "config.php";
                                 <div class="modal-content">
                                     <form id="user_form">
                                         <div class="modal-header">
-                                            <h4 class="modal-title">Add User</h4>
+                                            <h4 class="modal-title">Generate QR Code</h4>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             <div class="form-group">
-                                                <label>NAME</label>
-                                                <input type="text" id="name" name="name" class="form-control" required>
+                                                <label>Quantity</label>
+                                                <input type="text" id="quantity_c" name="quantity" class="form-control" required>
                                             </div>
                                             <div class="form-group">
-                                                <label>EMAIL</label>
-                                                <input type="email" id="email" name="email" class="form-control" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>PHONE</label>
-                                                <input type="phone" id="phone" name="phone" class="form-control" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>CITY</label>
-                                                <input type="city" id="city" name="city" class="form-control" required>
+                                                <label>Exp Date</label>
+                                                <input class="form-control" type="datetime-local" id="exp_date_c" name="exp_date" value="" required />
                                             </div>
                                         </div>
                                         <div class="modal-footer">
                                             <input type="hidden" value="1" name="type">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-success" id="btn-add">Add</button>
+                                            <button type="button" class="btn btn-success" id="btn-add">Generate</button>
                                         </div>
                                     </form>
                                 </div>
@@ -290,7 +295,11 @@ require_once "config.php";
                                             <div class="form-group align-items-center">
                                                 <img id="img_u" src="" style="width:150px; height:150px;">
                                             </div>
+                                            <div class="form-group">
+                                                <label>ID</label>
+                                                <input class="form-control" type="text" id="uuid_u" name="uuid" value="" readonly required />
 
+                                            </div>
                                             <div class="form-group">
                                                 <label>Status</label>
                                                 <select class="form-select" id="status_u" name="status" class="form-control" required>
@@ -302,15 +311,10 @@ require_once "config.php";
                                             <div class="form-group">
                                                 <label>Create Date</label>
                                                 <input class="form-control" type="datetime-local" id="cread_date_u" name="cread_date" value="" required />
-
                                             </div>
                                             <div class="form-group">
-                                                <label>PHONE</label>
-                                                <input type="phone" id="phone_u" name="phone" class="form-control" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>City</label>
-                                                <input type="city" id="city_u" name="city" class="form-control" required>
+                                                <label>Exp Date</label>
+                                                <input class="form-control" type="datetime-local" id="exp_date_u" name="exp_date" value="" required />
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -330,13 +334,13 @@ require_once "config.php";
                                     <form>
 
                                         <div class="modal-header">
-                                            <h4 class="modal-title">Delete User</h4>
+                                            <h4 class="modal-title">Delete QR Code</h4>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             <input type="hidden" id="id_d" name="id" class="form-control">
-                                            <p>Are you sure you want to delete these Records?</p>
-                                            <p class="text-warning"><small>This action cannot be undone.</small></p>
+                                            <p>คุณต้องการที่จะลบ QR Code นี้ใช่หรือไม่ ?</p>
+                                            <p class="text-warning"><small>เมื่อลบแล้วจะไม่สามารถย้อนกลับได้.</small></p>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -365,9 +369,13 @@ require_once "config.php";
 
 
 
+
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
     <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="../assets/vendor/libs/popper/popper.js"></script>
     <script src="../assets/vendor/js/bootstrap.js"></script>
     <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
@@ -385,12 +393,15 @@ require_once "config.php";
     <script src="../assets/js/dashboards-analytics.js"></script>
 
     <script type="text/javascript">
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
         $(document).on('click', '#btn-add', function(e) {
             var data = $("#user_form").serialize();
             $.ajax({
                 data: data,
                 type: "post",
-                url: "backend/save.php",
+                url: "save.php",
                 success: function(dataResult) {
                     var dataResult = JSON.parse(dataResult);
                     if (dataResult.statusCode == 200) {
@@ -408,21 +419,22 @@ require_once "config.php";
             var filename = id + ".png"
             var status = $(this).attr("data-status");
             var cread_date = $(this).attr("data-cread-date");
-            var phone = $(this).attr("data-exp-date");
-            var city = $(this).attr("data-checkout-date");
+            var exp_date = $(this).attr("data-exp-date");
+            var checkout_date = $(this).attr("data-checkout-date");
             document.getElementById("img_u").src = "../temp/" + filename;
+            $('#uuid_u').val(id);
             $('#id_u').val(id);
             $('#status_u').val(status);
             $('#cread_date_u').val(cread_date);
-            $('#phone_u').val(phone);
-            $('#city_u').val(city);
+            $('#exp_date_u').val(exp_date);
+            $('#checkout_date_u').val(checkout_date);
         });
         $(document).on('click', '#update', function(e) {
             var data = $("#update_form").serialize();
             $.ajax({
                 data: data,
                 type: "post",
-                url: "backend/save.php",
+                url: "save.php",
                 success: function(dataResult) {
                     var dataResult = JSON.parse(dataResult);
                     if (dataResult.statusCode == 200) {
@@ -442,7 +454,7 @@ require_once "config.php";
         });
         $(document).on("click", "#delete", function() {
             $.ajax({
-                url: "backend/save.php",
+                url: "save.php",
                 type: "POST",
                 cache: false,
                 data: {
@@ -452,7 +464,7 @@ require_once "config.php";
                 success: function(dataResult) {
                     $('#deleteEmployeeModal').modal('hide');
                     $("#" + dataResult).remove();
-
+                    location.reload();
                 }
             });
         });
@@ -471,7 +483,7 @@ require_once "config.php";
                     console.log(selected_values);
                     $.ajax({
                         type: "POST",
-                        url: "backend/save.php",
+                        url: "save.php",
                         cache: false,
                         data: {
                             type: 4,
@@ -482,6 +494,7 @@ require_once "config.php";
                             for (var i = 0; i < ids.length; i++) {
                                 $("#" + ids[i]).remove();
                             }
+                            location.reload();
                         }
                     });
                 }
