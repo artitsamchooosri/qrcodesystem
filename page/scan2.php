@@ -38,36 +38,50 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="../assets/js/config.js"></script>
     <style>
+        .bg {
+            background: linear-gradient(-45deg, #FFF700, #20201D, #12F320, #08570D);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            height: 100vh;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
         .center {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            margin-top: -100px;
+            margin-left: -200px;
+        }
+
+        .centercol {
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
 
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 0 10px;
-            background: #E3F2FD;
-        }
 
         .wrapper {
-            height: 270px;
-            width: 420px;
+            height: 73px;
+            width: 320px;
             border-radius: 7px;
-            background: #0B85FF;
-            padding: 30px 30px 35px;
+            padding: 3px 3px 3px;
             transition: height 0.2s ease;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+
         }
 
         .wrapper.active {
@@ -75,20 +89,20 @@
         }
 
         .wrapper form {
-            height: 210px;
+            height: 63px;
             display: flex;
             cursor: pointer;
             user-select: none;
             text-align: center;
-            border-radius: 7px;
-            background: #fff;
+            border-radius: 20px;
+            background: #16A01F;
             align-items: center;
             justify-content: center;
             transition: height 0.2s ease;
         }
 
         .wrapper.active form {
-            height: 225px;
+            height: 63px;
             pointer-events: none;
         }
 
@@ -111,9 +125,9 @@
         }
 
         form .content p {
-            color: #0B85FF;
+            color: #E7F8E8;
             margin-top: 15px;
-            font-size: 16px;
+            font-size: 26px;
         }
 
         .wrapper .details {
@@ -185,13 +199,24 @@
 
         @media (max-width: 450px) {
             .wrapper {
-                padding: 25px;
-                height: 260px;
+                padding: 5px;
+                height: 70px;
             }
 
             .wrapper.active {
                 height: 520px;
             }
+        }
+
+        .Css3Marquee-demo {
+            position: relative;
+            width: 500px;
+            height:200px;
+            cursor: pointer;
+            background: #16A01F;
+            font-size: 20px;
+            text-align: center;
+            color: #fff;
         }
     </style>
 </head>
@@ -199,7 +224,7 @@
 <body>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar layout-without-menu">
+    <div class="layout-wrapper layout-content-navbar layout-without-menu bg">
         <div class="layout-container">
             <!-- Layout container -->
             <div class="layout-page">
@@ -222,32 +247,50 @@
                 <div class="content-wrapper">
                     <!-- Content -->
 
-                    <div class="container-xxl  container-p-y center">
-                        <div class="row pb-3">
-                            <div class="col-lg-12 mb-12 order-0">
-
-                                <div class="row ">
-                                    <div class="wrapper">
-                                        <form action="#">
-                                            <input type="file" hidden>
-                                            <img src="#" alt="qr-code">
-                                            <div class="content">
-                                                <i class="fas fa-cloud-upload"></i>
-                                                <p>Scan QR Code</p>
-                                            </div>
-                                        </form>
-                                        <div class="details">
-                                            <textarea spellcheck="false" disabled></textarea>
-                                            <div class="buttons">
-                                                <button class="close">Close</button>
-                                                <button class="copy">Copy Text</button>
-                                            </div>
+                    <div class="container-xxl container-p-y ">
+                        <div class="row" style="margin-right: 0px;margin-left: 0px;">
+                            <div class="col-lg-12 mb-12 centercol">
+                                <img src="../assets/img/logo/logo.png" alt="bonus game" width="200" height="200" style="border-radius: 20px;">
+                            </div>
+                        </div>
+                        <div class="row" style="margin-right: 0px;margin-left: 0px;">
+                            <div class="col-lg-12 mb-12 centercol">
+                                <img src="../assets/img/logo/logo.png" alt="bonus game" width="700" height="60" style="border-radius: 7px;">
+                            </div>
+                        </div>
+                        <div class="row" style="margin-right: 0px;margin-left: 0px;">
+                            <div class="col-lg-12 mb-12 centercol">
+                                <div class="wrapper">
+                                    <form action="#">
+                                        <input type="file" hidden>
+                                        <img src="#" alt="qr-code">
+                                        <div class="content">
+                                            <i class="fas fa-cloud-upload"></i>
+                                            <p>Scan QR Code</p>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                                 <script src="../js/script.js"></script>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-lg-12 mb-12 centercol">
+                                <div class="Css3Marquee-demo" style="border-radius: 20px;">
+                                    
+                                    <div class="demo-top-bottom">
+
+                                    <h4 style="color: #FFF700;">Lock Bonus สำเร็จ 325 บาท 39hvxxxxx</h4>
+                                    <h4 style="color: #FFF700;">Lock Bonus สำเร็จ 550 บาท 39hvxxxxx</h4>
+                                    <h4 style="color: #FFF700;">Lock Bonus สำเร็จ 7,563 บาท 39hvxxxxx</h4>
+                                    <h4 style="color: #FFF700;">Lock Bonus สำเร็จ 40,000 บาท 39hvxxxxx</h4>
+                                    <h4 style="color: #FFF700;">Lock Bonus สำเร็จ 3,500 บาท 39hvxxxxx</h4>
+                                    <h4 style="color: #FFF700;">Lock Bonus สำเร็จ 125 บาท 39hvxxxxx</h4>
+                                   
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- / Content -->
 
                         <!-- Footer -->
@@ -266,6 +309,8 @@
 
         <!-- Core JS -->
         <!-- build:js assets/vendor/js/core.js -->
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+
         <script src="../assets/vendor/libs/jquery/jquery.js"></script>
         <script src="../assets/vendor/libs/popper/popper.js"></script>
         <script src="../assets/vendor/js/bootstrap.js"></script>
@@ -278,7 +323,13 @@
 
         <!-- Main JS -->
         <script src="../assets/js/main.js"></script>
-
+        <script type="text/javascript" src="../js/marquee.js"></script>
+        <script>
+            $('.demo-top-bottom').Css3Marquee({
+                direction: 'bottom',
+                speed: 2
+            });
+        </script>
 </body>
 <!-- Display the countdown timer in an element -->
 
