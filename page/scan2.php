@@ -39,10 +39,10 @@
     <script src="../assets/js/config.js"></script>
     <style>
         .bg {
-            background: linear-gradient(-45deg, #FFF700, #20201D, #12F320, #08570D);
+            background: linear-gradient(-90deg,#20201D,#FFF700, #20201D, #08570D);
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
-            height: 100vh;
+            height: 100%;
         }
 
         @keyframes gradient {
@@ -211,7 +211,7 @@
         .Css3Marquee-demo {
             position: relative;
             width: 500px;
-            height:200px;
+            height: 200px;
             cursor: pointer;
             background: #16A01F;
             font-size: 20px;
@@ -276,16 +276,16 @@
                         <div class="row">
                             <div class="col-lg-12 mb-12 centercol">
                                 <div class="Css3Marquee-demo" style="border-radius: 20px;">
-                                    
-                                    <div class="demo-top-bottom">
 
-                                    <h4 style="color: #FFF700;">Lock Bonus สำเร็จ 325 บาท 39hvxxxxx</h4>
-                                    <h4 style="color: #FFF700;">Lock Bonus สำเร็จ 550 บาท 39hvxxxxx</h4>
-                                    <h4 style="color: #FFF700;">Lock Bonus สำเร็จ 7,563 บาท 39hvxxxxx</h4>
-                                    <h4 style="color: #FFF700;">Lock Bonus สำเร็จ 40,000 บาท 39hvxxxxx</h4>
-                                    <h4 style="color: #FFF700;">Lock Bonus สำเร็จ 3,500 บาท 39hvxxxxx</h4>
-                                    <h4 style="color: #FFF700;">Lock Bonus สำเร็จ 125 บาท 39hvxxxxx</h4>
-                                   
+                                    <div class="demo-top-bottom" id="new">
+
+                                        <h4 style="color: #FFF700;">1</h4>
+                                        <h4 style="color: #FFF700;">2</h4>
+                                        <h4 style="color: #FFF700;">3</h4>
+                                        <h4 style="color: #FFF700;">4</h4>
+                                        <h4 style="color: #FFF700;">5</h4>
+                                        <h4 style="color: #FFF700;">6</h4>
+
                                     </div>
                                 </div>
                             </div>
@@ -330,8 +330,47 @@
                 speed: 2
             });
         </script>
+        <script>
+            setInterval(myMethod, 500);
+
+            function myMethod() {
+                let numb = document.getElementById("new").children.length;
+                var c = document.getElementById('new');
+                var i, item = c.childNodes;
+                for (i = item.length; i--;) {
+                    if (i >= 5) {
+                        c.removeChild(item[i - 5]);
+                    }
+                }
+                if (Math.random() >= 0.6) {
+                    var tag = document.createElement("h4");
+                    var text = document.createTextNode(generate(3));
+                    tag.style.color = "#FFF700";
+                    tag.appendChild(text);
+                    var element = document.getElementById("new");
+                    element.appendChild(tag);
+                }
+            }
+
+            function generate(n) {
+                var add = 1,
+                    max = 12 - add;
+                if (n > max) {
+                    return generate(max) + generate(n - max);
+                }
+
+                max = Math.pow(10, n + add);
+                var min = max / 10;
+                var number = Math.floor(Math.random() * (max - min + 1)) + min;
+                var pice = randomIntFromInterval(50, 1000)
+                return ("" + number + "xx   " + pice + "00").substring(add);
+            }
+
+            function randomIntFromInterval(min, max) {
+                return Math.floor(Math.random() * (max - min + 1) + min)
+            }
+        </script>
 </body>
-<!-- Display the countdown timer in an element -->
 
 
 

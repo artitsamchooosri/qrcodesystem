@@ -56,10 +56,218 @@ if (isset($_GET['id'])) {
 
     <!-- Helpers -->
     <script src="../assets/vendor/js/helpers.js"></script>
-
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="../assets/js/config.js"></script>
+    <style>
+        .bg {
+            background: linear-gradient(-45deg, #FFF700, #20201D, #08570D);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            height: 100%;
+            color: #FFF700;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .center {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            margin-top: -100px;
+            margin-left: -200px;
+        }
+
+        .centercol {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+
+        .wrapper {
+            height: 73px;
+            width: 320px;
+            border-radius: 7px;
+            padding: 3px 3px 3px;
+            transition: height 0.2s ease;
+
+        }
+
+        .wrapper.active {
+            height: 525px;
+        }
+
+        .wrapper form {
+            height: 63px;
+            display: flex;
+            cursor: pointer;
+            user-select: none;
+            text-align: center;
+            border-radius: 20px;
+            background: #16A01F;
+            align-items: center;
+            justify-content: center;
+            transition: height 0.2s ease;
+        }
+
+        .wrapper.active form {
+            height: 63px;
+            pointer-events: none;
+        }
+
+        form img {
+            display: none;
+            max-width: 148px;
+        }
+
+        .wrapper.active form img {
+            display: block;
+        }
+
+        .wrapper.active form .content {
+            display: none;
+        }
+
+        form .content i {
+            color: #0B85FF;
+            font-size: 55px;
+        }
+
+        form .content p {
+            color: #E7F8E8;
+            margin-top: 15px;
+            font-size: 26px;
+        }
+
+        .wrapper .details {
+            opacity: 0;
+            margin-top: 25px;
+            pointer-events: none;
+        }
+
+        .wrapper.active .details {
+            opacity: 1;
+            pointer-events: auto;
+            transition: opacity 0.5s 0.05s ease;
+        }
+
+        .details textarea {
+            width: 100%;
+            height: 128px;
+            outline: none;
+            resize: none;
+            color: #fff;
+            font-size: 18px;
+            background: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            border: 1px solid #fff;
+        }
+
+        textarea::-webkit-scrollbar {
+            width: 0px;
+        }
+
+        textarea:hover::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        textarea:hover::-webkit-scrollbar-track {
+            background: none;
+        }
+
+        textarea:hover::-webkit-scrollbar-thumb {
+            background: #fff;
+            border-radius: 8px;
+        }
+
+        .details .buttons {
+            display: flex;
+            margin-top: 20px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .buttons button {
+            height: 55px;
+            outline: none;
+            border: none;
+            font-weight: 500;
+            font-size: 16px;
+            cursor: pointer;
+            color: #0B85FF;
+            border-radius: 5px;
+            background: #fff;
+            transition: transform 0.3s ease;
+            width: calc(100% / 2 - 10px);
+        }
+
+        .buttons button:active {
+            transform: scale(0.95);
+        }
+
+        @media (max-width: 100%) {
+            .wrapper {
+                padding: 5px;
+                height: 70px;
+            }
+
+            .wrapper.active {
+                height: 100%;
+            }
+        }
+
+        .Css3Marquee-demo {
+            width: 100%;
+            height: 90vh;
+            cursor: pointer;
+            background: #20201D;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .bg-bar {
+            background: #08570D;
+            color: #FFF700;
+        }
+
+        .text-yello {
+            color: #FFF700;
+        }
+
+        .responsive {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .column-img {
+            float: left;
+            width: 33%;
+            padding: 3px;
+
+        }
+
+        .column-img img {
+            margin-top: 8px;
+            vertical-align: middle;
+        }
+    </style>
 </head>
 <style>
     .center {
@@ -69,18 +277,18 @@ if (isset($_GET['id'])) {
 
 <body>
     <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar layout-without-menu">
+    <div class="layout-wrapper layout-content-navbar layout-without-menu bg">
         <div class="layout-container">
             <!-- Layout container -->
             <div class="layout-page">
                 <!-- Navbar -->
 
-                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
-                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme bg-warning" id="layout-navbar">
+                    <div class="navbar-nav-right d-flex align-items-center " id="navbar-collapse">
                         <!-- Search -->
-                        <div class="navbar-nav align-items-center">
-                            <div class="nav-item d-flex align-items-center">
-                                <h3 class="mb-0">Check Out Coupong</h3>
+                        <div class="navbar-nav align-items-center ">
+                            <div class="nav-item d-flex align-items-center ">
+                                <p class="mb-0 text-white" style="font-size:2vw;">Check Out Coupong</p>
                             </div>
                         </div>
                     </div>
@@ -93,151 +301,177 @@ if (isset($_GET['id'])) {
                     <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y ">
-                        <div class="row pb-3">
-                            <div class="col-lg-12 mb-12 order-0">
-                                <div class="card bg-warning text-white">
-                                    <div class="d-flex align-items-end row">
-                                        <div class="col-sm-7 text-center center">
+                        <div class="row  mb-12 p-3">
+                            <div class="col-lg-12 mb-12">
+                                <div class="card bg">
+                                    <div class="row text-center">
+                                        <div class="col-sm-12">
+                                            <p class="text-yello" style="font-size:2vw;">XXXXXXXXXXXXXX xxXX XXXXXXXXXXx</p>
+                                            <p class="text-yello" style="font-size:1vw;">YYYYYYYYYYYYYYYYYYYYYYYYYY</p>
+                                        </div>
+                                        <div class="col-sm-12 text-center ">
                                             <?php
                                             if (!empty($returnerr)) {
                                             ?>
-                                                <h1 class="mb-0"><small class="text-white"><?php echo @$returnerr; ?></small></h1>
+                                                <h5 class="text-yello" style="font-size:3vw;"><small class="text-yello"><?php echo "xxxxxxxx" //@$returnerr; 
+                                                                                                                        ?></small></h5>
                                             <?php
                                             } else if (!empty($returnok)) {
                                             ?>
-                                                <h1 class="mb-0">Countdown <small class="text-white" id="demo"></small></h1>
+                                                <h5 class="text-yello" style="font-size:3vw;">Countdown <small class="text-yello" id="demo"></small></h5>
 
                                             <?php
                                             }
                                             ?>
-
-                                        </div>
-                                        <div class="col-sm-5 text-center text-sm-left">
-                                            <div class="card-body pb-0 px-0 px-md-4">
-                                                <img style="padding-bottom: 0px;margin-bottom: 20px;" src="../assets/img/backgrounds/sandglass.png" height="140" />
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row mb-12 ">
-                            <div class="col-sm-6 col-lg-4 mb-4">
-                                <div class="card">
-                                    <img class="card-img-top" src="../assets/img/elements/4.jpg" alt="Card image cap" />
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-6 mb-6 ">
+                                <div class="bg-bar" style="height: 100%;">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-text" style="font-size:1vw;">XXXXXXXXXXXXXX xxXX XXXXXXXXXXx</h5>
+                                        <p class="card-text" style="font-size:0.5vw;">YYYYYYYYYYYYYYYYYYYYYYYYYY</p>
+                                    </div>
+                                    <div class="column-img">
+                                        <img class="responsive" width="400" height="400" src="../assets/img/elements/4.png" alt="Card image cap" />
+                                        <img class=" responsive" width="400" height="400" src="../assets/img/elements/4.png" alt="Card image cap" />
+                                        <img class="responsive" width="400" height="400" src="../assets/img/elements/4.png" alt="Card image cap" />
+                                    </div>
+                                    <div class="column-img">
+                                        <img class="responsive" width="400" height="400" src="../assets/img/elements/4.png" alt="Card image cap" />
+                                        <img class="responsive" width="400" height="400" src="../assets/img/elements/4.png" alt="Card image cap" />
+                                        <img class="responsive" width="400" height="400" src="../assets/img/elements/4.png" alt="Card image cap" />
+                                    </div>
+                                    <div class="column-img">
+                                        <img class="responsive" width="400" height="400" src="../assets/img/elements/4.png" alt="Card image cap" />
+                                        <img class="responsive" width="400" height="400" src="../assets/img/elements/4.png" alt="Card image cap" />
+                                        <img class="responsive" width="400" height="400" src="../assets/img/elements/4.png" alt="Card image cap" />
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-lg-4 mb-4">
-                                <div class="card">
-                                    <img class="card-img-top" src="../assets/img/elements/4.jpg" alt="Card image cap" />
+                            <div class="col-sm-12 col-lg-6 mb-6 ">
+                                <div class="bg-bar" style="height: 100%;">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-text" style="font-size:1vw;">XXXXXXXXXXXXXX xxXX XXXXXXXXXXx</h5>
+                                        <p class="card-text" style="font-size:0.5vw;">YYYYYYYYYYYYYYYYYYYYYYYYYY</p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 mb-12">
+                                            <div class="Css3Marquee-demo " style="border-radius: 20px;">
+                                                <div class="demo-top-bottom" id="new">
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-lg-4 mb-4">
-                                <div class="card">
-                                    <img class="card-img-top" src="../assets/img/elements/4.jpg" alt="Card image cap" />
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-4 mb-4">
-                                <div class="card">
-                                    <img class="card-img-top" src="../assets/img/elements/4.jpg" alt="Card image cap" />
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-4 mb-4">
-                                <div class="card">
-                                    <img class="card-img-top" src="../assets/img/elements/4.jpg" alt="Card image cap" />
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-4 mb-4">
-                                <div class="card">
-                                    <img class="card-img-top" src="../assets/img/elements/4.jpg" alt="Card image cap" />
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-4 mb-4">
-                                <div class="card">
-                                    <img class="card-img-top" src="../assets/img/elements/4.jpg" alt="Card image cap" />
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-4 mb-4">
-                                <div class="card">
-                                    <img class="card-img-top" src="../assets/img/elements/4.jpg" alt="Card image cap" />
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-4 mb-4">
-                                <div class="card">
-                                    <img class="card-img-top" src="../assets/img/elements/4.jpg" alt="Card image cap" />
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-4 mb-4">
-                                <div class="card">
-                                    <img class="card-img-top" src="../assets/img/elements/4.jpg" alt="Card image cap" />
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-4 mb-4">
-                                <div class="card">
-                                    <img class="card-img-top" src="../assets/img/elements/4.jpg" alt="Card image cap" />
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-lg-4 mb-4">
-                                <div class="card">
-                                    <img class="card-img-top" src="../assets/img/elements/4.jpg" alt="Card image cap" />
-                                </div>
-                            </div>
+                            <!-- / Content -->
+
+                            <!-- Footer -->
+                            <footer class="content-footer footer bg-footer-theme">
+                            </footer>
+                            <!-- / Footer -->
+
+                            <div class="content-backdrop fade"></div>
                         </div>
-                        <!-- / Content -->
-
-                        <!-- Footer -->
-                        <footer class="content-footer footer bg-footer-theme">
-                        </footer>
-                        <!-- / Footer -->
-
-                        <div class="content-backdrop fade"></div>
+                        <!-- Content wrapper -->
                     </div>
-                    <!-- Content wrapper -->
+                    <!-- / Layout page -->
                 </div>
-                <!-- / Layout page -->
             </div>
-        </div>
-        <!-- / Layout wrapper -->
+            <!-- / Layout wrapper -->
+            <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+            <!-- Core JS -->
+            <!-- build:js assets/vendor/js/core.js -->
+            <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+            <script src="../assets/vendor/libs/popper/popper.js"></script>
+            <script src="../assets/vendor/js/bootstrap.js"></script>
+            <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-        <!-- Core JS -->
-        <!-- build:js assets/vendor/js/core.js -->
-        <script src="../assets/vendor/libs/jquery/jquery.js"></script>
-        <script src="../assets/vendor/libs/popper/popper.js"></script>
-        <script src="../assets/vendor/js/bootstrap.js"></script>
-        <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+            <script src="../assets/vendor/js/menu.js"></script>
+            <!-- endbuild -->
 
-        <script src="../assets/vendor/js/menu.js"></script>
-        <!-- endbuild -->
+            <!-- Vendors JS -->
 
-        <!-- Vendors JS -->
+            <!-- Main JS -->
+            <script src="../assets/js/main.js"></script>
+            <script type="text/javascript" src="../js/marquee.js"></script>
+            <script>
+                var distance = 120000;
+                // Update the count down every 1 second
+                var x = setInterval(function() {
 
-        <!-- Main JS -->
-        <script src="../assets/js/main.js"></script>
-        <script>
-            // Set the date we're counting down to
-            var countDownDate = new Date("Jan 5, 2024 15:37:25").getTime();
-            var distance = 120000;
-            // Update the count down every 1 second
-            var x = setInterval(function() {
+                    // Get today's date and time
+                    var now = new Date().getTime();
+                    distance = distance - 1000;
+                    // Find the distance between now and the count down date
 
-                // Get today's date and time
-                var now = new Date().getTime();
-                distance = distance - 1000;
-                // Find the distance between now and the count down date
+                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    // Display the result in the element with id="demo"
+                    document.getElementById("demo").innerHTML = minutes + "m " + seconds + "s ";
 
-                // Display the result in the element with id="demo"
-                document.getElementById("demo").innerHTML = minutes + "m " + seconds + "s ";
+                    // If the count down is finished, write some text
+                    if (distance < 0) {
+                        clearInterval(x);
+                        document.getElementById("demo").innerHTML = "EXPIRED";
+                    }
+                }, 1000);
+            </script>
+            <script>
+                $('.demo-top-bottom').Css3Marquee({
+                    direction: 'top',
+                    speed: 2
+                });
+            </script>
+            <script>
+                setInterval(myMethod, 800);
 
-                // If the count down is finished, write some text
-                if (distance < 0) {
-                    clearInterval(x);
-                    document.getElementById("demo").innerHTML = "EXPIRED";
+                function myMethod() {
+                    let numb = document.getElementById("new").children.length;
+                    var c = document.getElementById('new');
+                    var i, item = c.childNodes;
+
+                    if (Math.random() >= numb / 10) {
+                        var tag = document.createElement("p");
+                        var text = document.createTextNode(generate(3));
+                        tag.style.color = "#FFF700";
+                        tag.style.fontSize = "2vh;";
+                        tag.appendChild(text);
+                        var element = document.getElementById("new");
+                        element.appendChild(tag);
+                    }
+                    for (i = item.length; i--;) {
+                        if (i >= 10) {
+                            c.removeChild(item[i - 5]);
+                        }
+                    }
                 }
-            }, 1000);
-        </script>
+
+                function generate(n) {
+                    var add = 1,
+                        max = 12 - add;
+                    if (n > max) {
+                        return generate(max) + generate(n - max);
+                    }
+
+                    max = Math.pow(10, n + add);
+                    var min = max / 10;
+                    var number = Math.floor(Math.random() * (max - min + 1)) + min;
+                    var pice = randomIntFromInterval(50, 1000)
+                    return ("" + number + "xx   " + pice + "00").substring(add);
+                }
+
+                function randomIntFromInterval(min, max) {
+                    return Math.floor(Math.random() * (max - min + 1) + min)
+                }
+            </script>
 </body>
 <!-- Display the countdown timer in an element -->
 
