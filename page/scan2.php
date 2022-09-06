@@ -76,10 +76,10 @@
 
 
         .wrapper {
-            height: 73px;
-            width: 320px;
+            height: 5vh;
+            width: 220px;
             border-radius: 7px;
-            padding: 3px 3px 3px;
+            padding: 5px 3px 3px;
             transition: height 0.2s ease;
 
         }
@@ -89,13 +89,15 @@
         }
 
         .wrapper form {
-            height: 63px;
+            
+            height: 5vh;
+            font-size: 3vh;
             display: flex;
             cursor: pointer;
             user-select: none;
             text-align: center;
             border-radius: 20px;
-            background: #08570D;
+            background: #FFF700;
             align-items: center;
             justify-content: center;
             transition: height 0.2s ease;
@@ -127,7 +129,7 @@
         form .content p {
             color: #E7F8E8;
             margin-top: 15px;
-            font-size: 26px;
+            font-size: 15px;
         }
 
         .wrapper .details {
@@ -180,7 +182,7 @@
         }
 
         .buttons button {
-            height: 55px;
+            height: 70px;
             outline: none;
             border: none;
             font-weight: 500;
@@ -197,22 +199,11 @@
             transform: scale(0.95);
         }
 
-        @media (max-width: 450px) {
-            .wrapper {
-                padding: 5px;
-                height: 70px;
-            }
-
-            .wrapper.active {
-                height: 520px;
-            }
-        }
+  
 
         .Css3Marquee-demo {
-            width: 100%;
-            height: 20vh;
-            cursor: pointer;
-            background: #20201D;
+            margin-top: 20%;
+            height: 20vw;
             font-size: 20px;
             text-align: center;
         }
@@ -244,11 +235,29 @@
         }
 
         .smashinglogo {
-            background: url(../assets/img/tab/bg_message.png) 50% 100px no-repeat fixed;
-            border: 2px solid black;
-            padding: 25px;
-            background-repeat: no-repeat;
+            
+            height: 40vw;
+            background-position: center;
             background-size: contain;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+
+        .img-re {
+            max-width: 70%;
+            max-height: 100%;
+            position: absolute;
+            vertical-align: middle;
+            margin-top: 9vmin;
+        }
+
+        .hero-text {
+            text-align: center;
+
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #FFF700;
         }
     </style>
 </head>
@@ -266,37 +275,43 @@
                 <!-- / Navbar -->
 
                 <!-- Content wrapper -->
-                <div class="content-wrapper">
+                <div class="">
                     <!-- Content -->
 
-                    <div class="container-xxl container-p-y ">
-                        <div class="row" style="margin-right: 0px;margin-left: 0px;">
+                    <div class="container-xxl container-p-y "style=" padding: 30px;">
+                        <div class="row">
                             <div class="col-lg-12 mb-12 centercol">
-                                <img src="../assets/img/logo/1-200x200.png" alt="bonus game" width="200" height="200" style="border-radius: 20px;">
+                                <img src="../assets/img/logo/1-200x200.png" alt="bonus game"  style="width:20vw">
                             </div>
                         </div>
-                        <div class="row" style="margin-right: 0px;margin-left: 0px;">
+                        <div class="row">
                             <div class="col-lg-12 mb-12 centercol">
-                                <img src="../assets/img/tab/r2.png" alt="bonus game" width="700" height="60" style="border-radius: 7px;">
+                                <img src="../assets/img/tab/r2.png" alt="bonus game"  style="border-radius: 7px;width:50vw">
                             </div>
                         </div>
-                        <div class="row " style="margin-right: 0px;margin-left: 0px;">
+                        <div class="row ">
                             <div class="col-lg-12 mb-12 centercol ">
+
                                 <div class="wrapper">
                                     <form action="#">
                                         <input type="file" hidden>
                                         <img src="#" alt="qr-code">
                                         <div class="content ">
                                             <i class="fas fa-cloud-upload"></i>
-                                            <p style="color:#FFF700">Scan QR Code</p>
+                                            <p style="color:#08570D;font-size: 20px;">Scan QR Code</p>
                                         </div>
                                     </form>
                                 </div>
                                 <script src="../js/script.js"></script>
                             </div>
                         </div>
-                        <div class="row smashinglogo">
-                            
+                        <div class="row smashinglogo centercol">
+                        <img class="img-re centercol" src="../assets/img/tab/bg_message.png" alt="bonus game">
+                            <div class="Css3Marquee-demo ">
+                                <div class="demo-top-bottom hero-text" id="new">
+
+                                </div>
+                            </div>
                         </div>
 
                         <!-- / Content -->
@@ -350,7 +365,7 @@
                     var tag = document.createElement("p");
                     var text = document.createTextNode(generate(3));
                     tag.style.color = "#FFF700";
-                    tag.style.fontSize = "2vh;";
+                    tag.style.fontSize = "2vw";
                     tag.appendChild(text);
                     var element = document.getElementById("new");
                     element.appendChild(tag);
