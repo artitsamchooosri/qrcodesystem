@@ -39,7 +39,7 @@
     <script src="../assets/js/config.js"></script>
     <style>
         .bg {
-            background: linear-gradient(-90deg,#20201D,#FFF700, #20201D, #08570D);
+            background: linear-gradient(-45deg, #FFF700, #20201D, #08570D);
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
             height: 100%;
@@ -95,7 +95,7 @@
             user-select: none;
             text-align: center;
             border-radius: 20px;
-            background: #16A01F;
+            background: #08570D;
             align-items: center;
             justify-content: center;
             transition: height 0.2s ease;
@@ -209,14 +209,46 @@
         }
 
         .Css3Marquee-demo {
-            position: relative;
-            width: 500px;
-            height: 200px;
+            width: 100%;
+            height: 20vh;
             cursor: pointer;
-            background: #16A01F;
+            background: #20201D;
             font-size: 20px;
             text-align: center;
-            color: #fff;
+        }
+
+        .bg-bar {
+            background: #08570D;
+            color: #FFF700;
+        }
+
+        .text-yello {
+            color: #FFF700;
+        }
+
+        .responsive {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .column-img {
+            float: left;
+            width: 33%;
+            padding: 3px;
+
+        }
+
+        .column-img img {
+            margin-top: 8px;
+            vertical-align: middle;
+        }
+
+        .smashinglogo {
+            background: url(../assets/img/tab/bg_message.png) 50% 100px no-repeat fixed;
+            border: 2px solid black;
+            padding: 25px;
+            background-repeat: no-repeat;
+            background-size: contain;
         }
     </style>
 </head>
@@ -230,16 +262,6 @@
             <div class="layout-page">
                 <!-- Navbar -->
 
-                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
-                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-                        <!-- Search -->
-                        <div class="navbar-nav align-items-center">
-                            <div class="nav-item d-flex align-items-center">
-                                <h3 class="mb-0">Check Out Coupong</h3>
-                            </div>
-                        </div>
-                    </div>
-                </nav>
 
                 <!-- / Navbar -->
 
@@ -250,45 +272,31 @@
                     <div class="container-xxl container-p-y ">
                         <div class="row" style="margin-right: 0px;margin-left: 0px;">
                             <div class="col-lg-12 mb-12 centercol">
-                                <img src="../assets/img/logo/logo.png" alt="bonus game" width="200" height="200" style="border-radius: 20px;">
+                                <img src="../assets/img/logo/1-200x200.png" alt="bonus game" width="200" height="200" style="border-radius: 20px;">
                             </div>
                         </div>
                         <div class="row" style="margin-right: 0px;margin-left: 0px;">
                             <div class="col-lg-12 mb-12 centercol">
-                                <img src="../assets/img/logo/logo.png" alt="bonus game" width="700" height="60" style="border-radius: 7px;">
+                                <img src="../assets/img/tab/r2.png" alt="bonus game" width="700" height="60" style="border-radius: 7px;">
                             </div>
                         </div>
-                        <div class="row" style="margin-right: 0px;margin-left: 0px;">
-                            <div class="col-lg-12 mb-12 centercol">
+                        <div class="row " style="margin-right: 0px;margin-left: 0px;">
+                            <div class="col-lg-12 mb-12 centercol ">
                                 <div class="wrapper">
                                     <form action="#">
                                         <input type="file" hidden>
                                         <img src="#" alt="qr-code">
-                                        <div class="content">
+                                        <div class="content ">
                                             <i class="fas fa-cloud-upload"></i>
-                                            <p>Scan QR Code</p>
+                                            <p style="color:#FFF700">Scan QR Code</p>
                                         </div>
                                     </form>
                                 </div>
                                 <script src="../js/script.js"></script>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-12 mb-12 centercol">
-                                <div class="Css3Marquee-demo" style="border-radius: 20px;">
-
-                                    <div class="demo-top-bottom" id="new">
-
-                                        <h4 style="color: #FFF700;">1</h4>
-                                        <h4 style="color: #FFF700;">2</h4>
-                                        <h4 style="color: #FFF700;">3</h4>
-                                        <h4 style="color: #FFF700;">4</h4>
-                                        <h4 style="color: #FFF700;">5</h4>
-                                        <h4 style="color: #FFF700;">6</h4>
-
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="row smashinglogo">
+                            
                         </div>
 
                         <!-- / Content -->
@@ -326,7 +334,7 @@
         <script type="text/javascript" src="../js/marquee.js"></script>
         <script>
             $('.demo-top-bottom').Css3Marquee({
-                direction: 'bottom',
+                direction: 'top',
                 speed: 2
             });
         </script>
@@ -337,18 +345,20 @@
                 let numb = document.getElementById("new").children.length;
                 var c = document.getElementById('new');
                 var i, item = c.childNodes;
-                for (i = item.length; i--;) {
-                    if (i >= 5) {
-                        c.removeChild(item[i - 5]);
-                    }
-                }
-                if (Math.random() >= 0.6) {
-                    var tag = document.createElement("h4");
+
+                if (Math.random() >= numb / 10) {
+                    var tag = document.createElement("p");
                     var text = document.createTextNode(generate(3));
                     tag.style.color = "#FFF700";
+                    tag.style.fontSize = "2vh;";
                     tag.appendChild(text);
                     var element = document.getElementById("new");
                     element.appendChild(tag);
+                }
+                for (i = item.length; i--;) {
+                    if (i >= 10) {
+                        c.removeChild(item[i - 5]);
+                    }
                 }
             }
 
