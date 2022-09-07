@@ -281,20 +281,6 @@ if (isset($_GET['id'])) {
         <div class="layout-container">
             <!-- Layout container -->
             <div class="layout-page">
-                <!-- Navbar -->
-
-                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme bg-warning" id="layout-navbar">
-                    <div class="navbar-nav-right d-flex align-items-center " id="navbar-collapse">
-                        <!-- Search -->
-                        <div class="navbar-nav align-items-center ">
-                            <div class="nav-item d-flex align-items-center ">
-                                <p class="mb-0 text-white" style="font-size:2vw;">Check Out Coupong</p>
-                            </div>
-                        </div>
-                    </div>
-                </nav>
-
-                <!-- / Navbar -->
 
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
@@ -306,19 +292,18 @@ if (isset($_GET['id'])) {
                                 <div class="card bg">
                                     <div class="row text-center">
                                         <div class="col-sm-12">
-                                            <p class="text-yello" style="font-size:2vw;">XXXXXXXXXXXXXX xxXX XXXXXXXXXXx</p>
-                                            <p class="text-yello" style="font-size:1vw;">YYYYYYYYYYYYYYYYYYYYYYYYYY</p>
+                                            <p class="text-yello" style="font-size:3vmax;">Realtime QRcode Lock Bonus Success</p>
+                                            <p class="text-yello" style="font-size:2vmax;">ระบบ QRcode ล็อกโบนัส</p>
                                         </div>
                                         <div class="col-sm-12 text-center ">
                                             <?php
                                             if (!empty($returnerr)) {
                                             ?>
-                                                <h5 class="text-yello" style="font-size:3vw;"><small class="text-yello"><?php echo "xxxxxxxx" //@$returnerr; 
-                                                                                                                        ?></small></h5>
+                                                <h5 class="text-yello" style="font-size:3vmax;"><small class="text-yello"><?php echo @$returnerr; ?></small></h5>
                                             <?php
                                             } else if (!empty($returnok)) {
                                             ?>
-                                                <h5 class="text-yello" style="font-size:3vw;">Countdown <small class="text-yello" id="demo"></small></h5>
+                                                <h5 class="text-yello" style="font-size:3vmax;">หมดอายุ ภายใน<small class="text-yello" id="demo"></small></h5>
 
                                             <?php
                                             }
@@ -332,9 +317,17 @@ if (isset($_GET['id'])) {
                             <div class="col-sm-12 col-lg-6 mb-6 ">
                                 <div class="bg-bar" style="height: 100%;">
                                     <div class="card-body text-center">
-                                        <h5 class="card-text" style="font-size:1vw;">XXXXXXXXXXXXXX xxXX XXXXXXXXXXx</h5>
-                                        <p class="card-text" style="font-size:0.5vw;">YYYYYYYYYYYYYYYYYYYYYYYYYY</p>
+                                        <h5 class="text-yello" style="font-size:2vmax;">เกมส์ที่ล็อกโบนัส สำเร็จ</h5>
+                                        <p class="text-yello" style="font-size:1.5vmax;">กรุณาแคปภาพนี้ไว้</p>
                                     </div>
+                                    <?php
+                                    $imagesDir = glob('../assets/img/game/*');
+
+                                    $images = glob($imagesDir . '*.{jpg,jpeg,png,gif}', GLOB_BRACE);
+
+                                    $randomImage = $images[array_rand($imagesDir,9)];
+                                    print_r($randomImage);
+                                    ?>
                                     <div class="column-img">
                                         <img class="responsive" width="400" height="400" src="../assets/img/elements/4.png" alt="Card image cap" />
                                         <img class=" responsive" width="400" height="400" src="../assets/img/elements/4.png" alt="Card image cap" />
@@ -402,7 +395,7 @@ if (isset($_GET['id'])) {
             <script src="../assets/js/main.js"></script>
             <script type="text/javascript" src="../js/marquee.js"></script>
             <script>
-                var distance = 120000;
+                var distance = 1296000000;
                 // Update the count down every 1 second
                 var x = setInterval(function() {
 
@@ -410,12 +403,12 @@ if (isset($_GET['id'])) {
                     var now = new Date().getTime();
                     distance = distance - 1000;
                     // Find the distance between now and the count down date
-
+                    var hourss = Math.floor((distance / (1000 * 60 * 60 * 60)));
                     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
                     // Display the result in the element with id="demo"
-                    document.getElementById("demo").innerHTML = minutes + "m " + seconds + "s ";
+                    document.getElementById("demo").innerHTML = "   " + hourss + " : " + minutes + " ชั่วโมง";
 
                     // If the count down is finished, write some text
                     if (distance < 0) {
