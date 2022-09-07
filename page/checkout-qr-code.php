@@ -234,10 +234,12 @@ if (isset($_GET['id'])) {
         }
 
         .Css3Marquee-demo {
+            margin-top: 15vmin;
+
             width: 100%;
-            height: 90vh;
+
+            height: 18vmin;
             cursor: pointer;
-            background: #20201D;
             font-size: 20px;
             text-align: center;
         }
@@ -252,20 +254,39 @@ if (isset($_GET['id'])) {
         }
 
         .responsive {
-            max-width: 100%;
-            height: auto;
+            height: 30vmin;
+            width: 20vmin;
+            max-width: 200px;
+            max-height: 100px;
+            padding-bottom: 8px;
         }
 
         .column-img {
-            float: left;
-            width: 33%;
-            padding: 3px;
+
+
+            padding: 8px;
+
+        }
+
+        .img-re {
+            max-width: 85vmin;
+            max-height: 40vmin;
+            position: absolute;
+            vertical-align: middle;
+            margin-top: 18vmin;
 
         }
 
         .column-img img {
             margin-top: 8px;
             vertical-align: middle;
+        }
+
+        .box-card {
+            border-radius: 20px;
+            border-color: #FFF700;
+            padding: 15px;
+            border: 2px solid #FFF700;
         }
     </style>
 </head>
@@ -287,9 +308,9 @@ if (isset($_GET['id'])) {
                     <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y ">
-                        <div class="row  mb-12 p-3">
-                            <div class="col-lg-12 mb-12">
-                                <div class="card bg">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="">
                                     <div class="row text-center">
                                         <div class="col-sm-12">
                                             <p class="text-yello" style="font-size:3vmax;">Realtime QRcode Lock Bonus Success</p>
@@ -314,45 +335,45 @@ if (isset($_GET['id'])) {
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-12 col-lg-6 mb-6 ">
-                                <div class="bg-bar" style="height: 100%;">
-                                    <div class="card-body text-center">
+                            <div class="col-sm-12 col-lg-6">
+                                <div class="box-card" style="height: 100%;">
+                                    <div class="text-center">
                                         <h5 class="text-yello" style="font-size:2vmax;">เกมส์ที่ล็อกโบนัส สำเร็จ</h5>
                                         <p class="text-yello" style="font-size:1.5vmax;">กรุณาแคปภาพนี้ไว้</p>
                                     </div>
                                     <?php
-                                    $imagesDir = glob('../assets/img/game/*');
-
-                                    $images = glob($imagesDir . '*.{jpg,jpeg,png,gif}', GLOB_BRACE);
-
-                                    $randomImage = $images[array_rand($imagesDir,9)];
-                                    print_r($randomImage);
+                                    for ($x = 0; $x < 3; $x++) {
                                     ?>
-                                    <div class="column-img">
-                                        <img class="responsive" width="400" height="400" src="../assets/img/elements/4.png" alt="Card image cap" />
-                                        <img class=" responsive" width="400" height="400" src="../assets/img/elements/4.png" alt="Card image cap" />
-                                        <img class="responsive" width="400" height="400" src="../assets/img/elements/4.png" alt="Card image cap" />
-                                    </div>
-                                    <div class="column-img">
-                                        <img class="responsive" width="400" height="400" src="../assets/img/elements/4.png" alt="Card image cap" />
-                                        <img class="responsive" width="400" height="400" src="../assets/img/elements/4.png" alt="Card image cap" />
-                                        <img class="responsive" width="400" height="400" src="../assets/img/elements/4.png" alt="Card image cap" />
-                                    </div>
-                                    <div class="column-img">
-                                        <img class="responsive" width="400" height="400" src="../assets/img/elements/4.png" alt="Card image cap" />
-                                        <img class="responsive" width="400" height="400" src="../assets/img/elements/4.png" alt="Card image cap" />
-                                        <img class="responsive" width="400" height="400" src="../assets/img/elements/4.png" alt="Card image cap" />
-                                    </div>
+                                        <div class="row centercol">
+                                            <?php
+                                            for ($i = 0; $i < 3; $i++) {
+                                                $dir_path = "../assets/img/game/";
+                                                $files = scandir($dir_path);
+                                                $count = count($files);
+                                                $index = rand(2, ($count - 1));
+                                                $filenams = $files[$index];
+                                            ?>
+                                                <img class="responsive" src="<?php echo $dir_path . "/" . $filenams ?>" alt="Card image cap" />
+                                            <?php
+                                            }
+                                            ?>
+                                        </div>
+                                    <?php
+                                    }
+                                    ?>
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-lg-6 mb-6 ">
-                                <div class="bg-bar" style="height: 100%;">
-                                    <div class="card-body text-center">
-                                        <h5 class="card-text" style="font-size:1vw;">XXXXXXXXXXXXXX xxXX XXXXXXXXXXx</h5>
-                                        <p class="card-text" style="font-size:0.5vw;">YYYYYYYYYYYYYYYYYYYYYYYYYY</p>
+                            <div class="col-sm-12 col-lg-6">
+                                <div class=" box-card m-2" style="height: 100%;">
+                                    <div class="text-center">
+                                        <h5 class="text-yello" style="font-size:2vmax;">เรียลไทม์ ที่เจาะสำเร็จแล้ว</h5>
+
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-12 mb-12">
+                                        <div class="col-lg-12">
+                                            <div class="row centercol">
+                                                <img class="img-re " src="../assets/img/tab/bg_message.png" alt="bonus game">
+                                            </div>
                                             <div class="Css3Marquee-demo " style="border-radius: 20px;">
                                                 <div class="demo-top-bottom" id="new">
 
@@ -401,7 +422,7 @@ if (isset($_GET['id'])) {
 
                     // Get today's date and time
                     var now = new Date().getTime();
-                    distance = distance - 1000;
+                    distance = distance - 500;
                     // Find the distance between now and the count down date
                     var hourss = Math.floor((distance / (1000 * 60 * 60 * 60)));
                     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -424,25 +445,25 @@ if (isset($_GET['id'])) {
                 });
             </script>
             <script>
-                setInterval(myMethod, 800);
+                setInterval(myMethod, 1000);
 
                 function myMethod() {
                     let numb = document.getElementById("new").children.length;
                     var c = document.getElementById('new');
                     var i, item = c.childNodes;
 
-                    if (Math.random() >= numb / 10) {
+                    if (Math.random() >= 0.4) {
                         var tag = document.createElement("p");
                         var text = document.createTextNode(generate(3));
                         tag.style.color = "#FFF700";
-                        tag.style.fontSize = "2vh;";
+                        tag.style.fontSize = "2vw";
                         tag.appendChild(text);
                         var element = document.getElementById("new");
                         element.appendChild(tag);
                     }
                     for (i = item.length; i--;) {
                         if (i >= 10) {
-                            c.removeChild(item[i - 5]);
+                            c.removeChild(item[i - 11]);
                         }
                     }
                 }
