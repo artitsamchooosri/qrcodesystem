@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
     $idcoupong = $_POST['idcoupong'];
     $filename = $idcoupong . '.png';
     $expdate = $_POST['expdate'];
-    $body =  'https://' . htmlspecialchars($_SERVER['SERVER_NAME']) . '/qrscan-system/page/checkout-qr-code.php?id=' . $idcoupong;
+    $body =  'https://' . htmlspecialchars($_SERVER['SERVER_NAME']) . '/page/checkout-qr-code.php?id=' . $idcoupong;
     $codeContents = $body;
     QRcode::png($codeContents, $tempDir . $filename, QR_ECLEVEL_H, 9,4);
     $returninsert = "";

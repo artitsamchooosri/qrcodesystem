@@ -1,7 +1,4 @@
-<?php
-require_once "config.php";
-include('../libs/phpqrcode/qrlib.php');
-?>
+
 <!DOCTYPE html>
 <html class="light-style layout-menu-fixed" data-assets-path="../assets/" data-template="vertical-menu-template-free">
 
@@ -65,6 +62,7 @@ include('../libs/phpqrcode/qrlib.php');
                         <div class="navbar-nav align-items-center">
                             <div class="nav-item d-flex align-items-center">
                                 <h3 class="mb-0">Check Out Coupong</h3>
+                                
                             </div>
                         </div>
                     </div>
@@ -75,7 +73,7 @@ include('../libs/phpqrcode/qrlib.php');
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
                     <!-- Content -->
-
+                    <img src="qr-scan.gif" alt="bonus game"  style="width:20vw">
                     <div class="container-xxl  container-p-y center">
                         <div class="row pb-3">
                             <div class="col-lg-12 mb-12 order-0">

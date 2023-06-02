@@ -18,7 +18,11 @@ if (isset($_GET['id'])) {
             $returnerr = "ส่งคำสั่งไม่ได้";
         }
     } else {
+        echo '<script>alert("QR Code ถูกใช้ไปแล้ว กรุณาใช้ QR Code โค้ดใหม่") </script>';
+        
+        header( "Refresh:0.1; url=index.php", true, 303);
         $returnerr = $check_coupong;
+        exit;
     }
 }
 ?>
@@ -69,7 +73,12 @@ if (isset($_GET['id'])) {
             height: 100%;
             color: #FFF700;
         }
-
+        .bg-blacks{
+            background:#17202A;
+            background-color:black;
+            color: #17202A;
+            height: 100%;
+        }
         @keyframes gradient {
             0% {
                 background-position: 0% 50%;
@@ -179,6 +188,19 @@ if (isset($_GET['id'])) {
             padding: 10px 15px;
             border: 1px solid #fff;
         }
+        .border_blue{
+            border-radius: 15px;
+            border: 3px solid #5050DB;
+            padding: 5px;
+            background:#00008B
+        }
+        .border_green{
+            border-radius: 15px;
+            border: 3px solid #50DC50;
+            padding-top: 5px;
+            margin-bottom: 10px;
+            background:#008C00
+        }
 
         textarea::-webkit-scrollbar {
             width: 0px;
@@ -255,16 +277,16 @@ if (isset($_GET['id'])) {
 
         .responsive {
             height: 30vmin;
-            width: 20vmin;
-            max-width: 200px;
+            width: 30vmin;
+            max-width: 25vmin;
             max-height: 100px;
-            padding-bottom: 8px;
+            padding: 8px;
         }
 
         .column-img {
 
 
-            padding: 8px;
+            padding: 10px;
 
         }
 
@@ -298,7 +320,7 @@ if (isset($_GET['id'])) {
 
 <body>
     <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar layout-without-menu bg">
+    <div class="layout-wrapper layout-content-navbar layout-without-menu bg-blacks">
         <div class="layout-container">
             <!-- Layout container -->
             <div class="layout-page">
@@ -309,22 +331,22 @@ if (isset($_GET['id'])) {
 
                     <div class="container-xxl flex-grow-1 container-p-y ">
                         <div class="row">
-                            <div class="col-lg-12">
+                            <div class="col-lg-12 ">
                                 <div class="">
                                     <div class="row text-center">
-                                        <div class="col-sm-12">
-                                            <p class="text-yello" style="font-size:3vmax;">Realtime QRcode Lock Bonus Success</p>
+                                        <div class="col-sm-12 ">
+                                            <p class="text-yello border_blue" style="font-size:3vmax;">Realtime QRcode Lock Bonus Success</p>
                                             <p class="text-yello" style="font-size:2vmax;">ระบบ QRcode ล็อกโบนัส</p>
                                         </div>
-                                        <div class="col-sm-12 text-center ">
+                                        <div class="col-sm-12 text-center border_green">
                                             <?php
                                             if (!empty($returnerr)) {
                                             ?>
-                                                <h5 class="text-yello" style="font-size:3vmax;"><small class="text-yello"><?php echo @$returnerr; ?></small></h5>
+                                                <h5 class="text-yello" style="font-size:3vmax;color:#E59866 "><small class="text-yello" style="color:#EDBB99 "><?php echo @$returnerr; ?></small></h5>
                                             <?php
                                             } else if (!empty($returnok)) {
                                             ?>
-                                                <h5 class="text-yello" style="font-size:3vmax;">หมดอายุ ภายใน<small class="text-yello" id="demo"></small></h5>
+                                                <h5 class="text-yello" style="font-size:3vmax;color:#76D7C4">หมดอายุ ภายใน<small class="text-yello" style="color:#76D7C4" id="demo"></small></h5>
 
                                             <?php
                                             }
@@ -338,13 +360,13 @@ if (isset($_GET['id'])) {
                             <div class="col-sm-12 col-lg-6">
                                 <div class="box-card" style="height: 100%;">
                                     <div class="text-center">
-                                        <h5 class="text-yello" style="font-size:2vmax;">เกมส์ที่ล็อกโบนัส สำเร็จ</h5>
-                                        <p class="text-yello" style="font-size:1.5vmax;">กรุณาแคปภาพนี้ไว้</p>
+                                        <h5 class="text-yello" style="font-size:2vmax;color: #DAF7A6;">เกมส์ที่ล็อกโบนัส สำเร็จ</h5>
+                                        <p class="text-yello" style="font-size:1.5vmax;color: #DAF7A6;">กรุณาแคปภาพนี้ไว้</p>
                                     </div>
                                     <?php
                                     for ($x = 0; $x < 3; $x++) {
                                     ?>
-                                        <div class="row centercol">
+                                        <div class=" centercol">
                                             <?php
                                             for ($i = 0; $i < 3; $i++) {
                                                 $dir_path = "../assets/img/game/";
@@ -353,7 +375,7 @@ if (isset($_GET['id'])) {
                                                 $index = rand(2, ($count - 1));
                                                 $filenams = $files[$index];
                                             ?>
-                                                <img class="responsive" src="<?php echo $dir_path . "/" . $filenams ?>" alt="Card image cap" />
+                                                <a href="https://monaco88.imember.cc/login"><img class="responsive" src="<?php echo $dir_path . "/" . $filenams ?>" alt="Card image cap" /></a>
                                             <?php
                                             }
                                             ?>
@@ -366,8 +388,7 @@ if (isset($_GET['id'])) {
                             <div class="col-sm-12 col-lg-6">
                                 <div class=" box-card m-2" style="height: 100%;">
                                     <div class="text-center">
-                                        <h5 class="text-yello" style="font-size:2vmax;">เรียลไทม์ ที่เจาะสำเร็จแล้ว</h5>
-
+                                        <!-- <h5 class="text-yello" style="font-size:2vmax;padding: 8px;color:#CCD1D1">เรียลไทม์ ที่เจาะสำเร็จแล้ว</h5> -->
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-12">
@@ -422,21 +443,22 @@ if (isset($_GET['id'])) {
 
                     // Get today's date and time
                     var now = new Date().getTime();
-                    distance = distance - 500;
+                    distance = distance - 1000;
                     // Find the distance between now and the count down date
                     var hourss = Math.floor((distance / (1000 * 60 * 60 * 60)));
                     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
                     // Display the result in the element with id="demo"
-                    document.getElementById("demo").innerHTML = "   " + hourss + " : " + minutes + " ชั่วโมง";
+                    if (document.getElementById('demo')){
+                    document.getElementById("demo").innerHTML = "   " + hourss + " ชั่วโมง " + minutes + " นาที " + seconds + " วินาที";
 
                     // If the count down is finished, write some text
                     if (distance < 0) {
                         clearInterval(x);
                         document.getElementById("demo").innerHTML = "EXPIRED";
                     }
-                }, 1000);
+                }}, 1000);
             </script>
             <script>
                 $('.demo-top-bottom').Css3Marquee({
@@ -448,14 +470,27 @@ if (isset($_GET['id'])) {
                 setInterval(myMethod, 1000);
 
                 function myMethod() {
+                    var add = 1,
+                        max = 12 - add;
                     let numb = document.getElementById("new").children.length;
                     var c = document.getElementById('new');
                     var i, item = c.childNodes;
 
                     if (Math.random() >= 0.4) {
                         var tag = document.createElement("p");
-                        var text = document.createTextNode(generate(3));
-                        tag.style.color = "#FFF700";
+                        var piceran=parseInt(generate(3))
+                        var text_pice=document.createTextNode((" Lock Bonus สำเร็จ  "+ piceran.toLocaleString('en-US') +" บาท").substring(add));
+                        var text = text_pice;
+                        if(piceran < 10000){
+                            tag.style.color = "#808000";
+                        }else if(piceran >=10000 &&  piceran <30000){
+                            tag.style.color = "#FFA500";
+                        }else if(piceran >=30000 &&  piceran <50000){
+                            tag.style.color = "#FB00FF";
+                        }else{
+                            tag.style.color = "#54FF50";
+                        }
+                        
                         tag.style.fontSize = "2vw";
                         tag.appendChild(text);
                         var element = document.getElementById("new");
@@ -474,12 +509,11 @@ if (isset($_GET['id'])) {
                     if (n > max) {
                         return generate(max) + generate(n - max);
                     }
-
                     max = Math.pow(10, n + add);
                     var min = max / 10;
                     var number = Math.floor(Math.random() * (max - min + 1)) + min;
-                    var pice = randomIntFromInterval(50, 1000)
-                    return ("" + number + "xx   " + pice + "00").substring(add);
+                    var pice = randomIntFromInterval(50, 1000);
+                    return pice+"00";
                 }
 
                 function randomIntFromInterval(min, max) {

@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: text/html; charset=utf-8');
 require_once "config.php";
 include('../libs/phpqrcode/qrlib.php');
 $conn = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
@@ -19,18 +20,19 @@ function guidv4($data = null)
 
 if (count($_POST) > 0) {
 	if ($_POST['type'] == 1) {
+		$keynumber = $_POST['keynumber'];
 		$quantity = $_POST['quantity'];
 		$exp_date = $_POST['exp_date'];
-		for ($x = 0; $x <= $quantity; $x++) {
+		for ($x = 0; $x < $quantity; $x++) {
 			$tempDir = '../temp/';
 			$idcoupong = guidv4();
 			$filename = $idcoupong . '.png';
-			$body =  'https://' . htmlspecialchars($_SERVER['SERVER_NAME']) . '/qrscan-system/page/checkout-qr-code.php?id=' . $idcoupong;
+			$body =  'https://' . htmlspecialchars($_SERVER['SERVER_NAME']) . '/page/checkout-qr-code.php?id=' . $idcoupong;
 			$codeContents = $body;
 			QRcode::png($codeContents, $tempDir . $filename, QR_ECLEVEL_H, 9, 4);
 			$returninsert = "";
-			$sql = "INSERT INTO `qrscan`.`coupong`(`uuid`, `cread-date`, `exp-date`, `status`, `url-coupong`, `filename`) 
-VALUES ('" . $idcoupong . "', '" . date("Y-m-d H:i:s") . "', '" . $exp_date . "', 'available', '" . $body . "', '" . $filename . "')";
+			$sql = "INSERT INTO `qrscan`.`coupong`(`uuid`, `cread-date`, `exp-date`, `status`, `url-coupong`, `filename`,`keynumber`) 
+VALUES ('" . $idcoupong . "', '" . date("Y-m-d H:i:s") . "', '" . $exp_date . "', 'available', '" . $body . "', '" . $filename . "','" . $keynumber . "')";
 			if (mysqli_query($conn, $sql)) {
 				$check= json_encode(array("statusCode" => 200));
 			} else {
@@ -48,7 +50,8 @@ if (count($_POST) > 0) {
 		$cread_date = $_POST['cread_date'];
 		$exp_date = $_POST['exp_date'];
 		$status = $_POST['status'];
-		$sql = "UPDATE `coupong` SET `cread-date`='$cread_date',`exp-date`='$exp_date',`status`='$status' WHERE uuid='".$uuid."'";
+		$keynumber = $_POST['keynumber'];
+		$sql = "UPDATE `coupong` SET `cread-date`='$cread_date',`exp-date`='$exp_date',`status`='$status',`keynumber`='$keynumber' WHERE uuid='".$uuid."'";
 		if (mysqli_query($conn, $sql)) {
 			echo json_encode(array("statusCode" => 200));
 		} else {
